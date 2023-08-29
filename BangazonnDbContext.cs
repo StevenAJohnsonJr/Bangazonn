@@ -28,11 +28,11 @@ namespace Bangazonn
         {
             _ = modelBuilder.Entity<Users>().HasData(new Users[]
            {
-            new Users {Id = 1, Name = "Trent Jones", Username = "Trent3000", Created_at = new DateTime(2023,4,20), isSeller = true},
-            new Users {Id = 2, Name = "Jack James", Username = "Jack9000", Created_at = new DateTime(2023,8,20), isSeller = false},
-            new Users {Id = 3, Name = "Barry Holmes", Username = "Barcoder1500", Created_at = new DateTime(2023,1,2), isSeller = true},
-            new Users {Id = 4, Name = "Manny Marzone", Username = "ZoneTyme5000", Created_at = new DateTime(2023,4,3), isSeller = true},
-            new Users {Id = 5, Name = "Travis Sharp", Username = "Sharpx6", Created_at = new DateTime(2023,7,20), isSeller = false},
+            new Users {Id = 1, Name = "Trent Jones", Username = "Trent3000", Created_at = new DateTime(2023,4,20), isSeller = true, Uid = "ZjnYscBnyAOQCwSCi1NWLYjo6bs1"},
+            new Users {Id = 2, Name = "Jack James", Username = "Jack9000", Created_at = new DateTime(2023,8,20), isSeller = false, Uid = "ZjnYscBnyAOQCwSCi1NWLYjo6bs1"},
+            new Users {Id = 3, Name = "Barry Holmes", Username = "Barcoder1500", Created_at = new DateTime(2023,1,2), isSeller = true, Uid = "ZjnYscBnyAOQCwSCi1NWLYjo6bs1"},
+            new Users {Id = 4, Name = "Manny Marzone", Username = "ZoneTyme5000", Created_at = new DateTime(2023,4,3), isSeller = true, Uid = "ZjnYscBnyAOQCwSCi1NWLYjo6bs1"},
+            new Users {Id = 5, Name = "Travis Sharp", Username = "Sharpx6", Created_at = new DateTime(2023,7,20), isSeller = false, Uid = "ZjnYscBnyAOQCwSCi1NWLYjo6bs1"},
            });
 
             modelBuilder.Entity<UserPayments>().HasData(new UserPayments[]

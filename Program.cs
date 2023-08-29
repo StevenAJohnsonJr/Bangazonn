@@ -34,29 +34,116 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+// get all users
+app.MapGet("/api/Users", (BangazonnDbContext db) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    return db.Users.ToList();
+});
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("api/users/{id}", (BangazonnDbContext db, int id) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    Users user = db.Users.SingleOrDefault(pr => pr.Id == id);
+    return user;
+});
+
+// delete user by id 
+app.MapDelete("api/users/{id}", (BangazonnDbContext db, int id) =>
+{
+    Users user = db.Users.SingleOrDefault(pr => pr.Id == id);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+    db.Users.Remove(user);
+    db.SaveChanges();
+    return Results.NoContent();
+});
+
+//create users 
+app.MapPost("api/Users", (BangazonnDbContext db, Users user) =>
+{
+    db.Users.Add(user);
+    db.SaveChanges();
+    return Results.Created($"/api/Users/{user.Id}", user);
+});
+
+// get products
+app.MapGet("/api/Products", (BangazonnDbContext db) =>
+{
+    return db.Products.ToList();
+});
+
+// get products by id 
+app.MapGet("api/products/{id}", (BangazonnDbContext db, int id) =>
+{
+    Products product = db.Products.SingleOrDefault(pr => pr.Id == id);
+    return product;
+});
+
+// delete products 
+app.MapDelete("api/products/{id}", (BangazonnDbContext db, int id) =>
+{
+    Products product = db.Products.SingleOrDefault(pr => pr.Id == id);
+    if (product == null)
+    {
+        return Results.NotFound();
+    }
+    db.Products.Remove(product);
+    db.SaveChanges();
+    return Results.NoContent();
+});
+
+//create products 
+app.MapPost("api/Products", (BangazonnDbContext db, Products product) =>
+{
+    db.Products.Add(product);
+    db.SaveChanges();
+    return Results.Created($"/api/Products/{product.Id}", product);
+});
+
+
+
+
+
+
+
+// get products
+app.MapGet("/api/orderss", (BangazonnDbContext db) =>
+{
+    return db.Orders.ToList();
+});
+
+// get orders by id 
+app.MapGet("api/orders/{id}", (BangazonnDbContext db, int id) =>
+{
+    Orders order = db.Orders.SingleOrDefault(pr => pr.Id == id);
+    return order;
+});
+
+// delete single order 
+app.MapDelete("api/orders/{id}", (BangazonnDbContext db, int id) =>
+{
+    Orders order = db.Orders.SingleOrDefault(pr => pr.Id == id);
+    if (order == null)
+    {
+        return Results.NotFound();
+    }
+    db.Orders.Remove(order);
+    db.SaveChanges();
+    return Results.NoContent();
+});
+
+//create orders 
+app.MapPost("api/Orders", (BangazonnDbContext db, Orders order) =>
+{
+    db.Orders.Add(order);
+    db.SaveChanges();
+    return Results.Created($"/api/Orders/{order.Id}", order);
+});
+
+
+app.UseHttpsRedirection();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+

@@ -102,13 +102,8 @@ app.MapPost("api/Products", (BangazonnDbContext db, Products product) =>
 });
 
 
-
-
-
-
-
-// get products
-app.MapGet("/api/orderss", (BangazonnDbContext db) =>
+// get orders
+app.MapGet("/api/orders", (BangazonnDbContext db) =>
 {
     return db.Orders.ToList();
 });

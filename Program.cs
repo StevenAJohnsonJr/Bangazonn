@@ -137,6 +137,53 @@ app.MapPost("api/Orders", (BangazonnDbContext db, Orders order) =>
 });
 
 
+// get paymentTypes
+app.MapGet("/api/paymenttypes", (BangazonnDbContext db) =>
+{
+    return db.PaymentTypes.ToList();
+});
+
+// get paymentTypes by id 
+app.MapGet("api/paymenttypes/{id}", (BangazonnDbContext db, int id) =>
+{
+    PaymentType payment = db.PaymentTypes.SingleOrDefault(pr => pr.Id == id);
+    return payment;
+});
+
+app.MapGet("/api/ProductCategories", (BangazonnDbContext db) =>
+{
+    return db.ProductCategories.ToList();
+});
+
+// get ProductCategories by id 
+app.MapGet("api/ProductCategories/{id}", (BangazonnDbContext db, int id) =>
+{
+    ProductCategories category = db.ProductCategories.SingleOrDefault(pr => pr.Id == id);
+    return category;
+});
+
+// delete single ProductCategory
+app.MapDelete("api/ProductCategories/{id}", (BangazonnDbContext db, int id) =>
+{
+    ProductCategories category = db.ProductCategories.SingleOrDefault(pr => pr.Id == id);
+    if (category == null)
+    {
+        return Results.NotFound();
+    }
+    db.ProductCategories.Remove(category);
+    db.SaveChanges();
+    return Results.NoContent();
+});
+
+//create ProductCategory
+app.MapPost("api/ProductCategories", (BangazonnDbContext db, ProductCategories category) =>
+{
+    db.ProductCategories.Add(category);
+    db.SaveChanges();
+    return Results.Created($"/api/ProductCategories/{category.Id}", category);
+});
+
+
 app.UseHttpsRedirection();
 
 app.Run();

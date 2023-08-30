@@ -15,7 +15,7 @@ namespace Bangazonn
         public DbSet<UserPayments> UserPayments { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductCategories> ProductCategories { get; set; }
-        public DbSet<PaymentTypes> PaymentTypes { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
 
@@ -37,11 +37,11 @@ namespace Bangazonn
 
             modelBuilder.Entity<UserPayments>().HasData(new UserPayments[]
             {
-            new UserPayments {Id = 1, UserId = 1, PaymentId = 1,},
-            new UserPayments {Id = 2, UserId = 2, PaymentId = 2,},
-            new UserPayments {Id = 3, UserId = 3, PaymentId = 3,},
-            new UserPayments {Id = 4, UserId = 4, PaymentId = 4,},
-            new UserPayments {Id = 5, UserId = 5, PaymentId = 5,},
+            new UserPayments {Id = 1, UserId = 1, PaymentType = 1,},
+            new UserPayments {Id = 2, UserId = 2, PaymentType = 2,},
+            new UserPayments {Id = 3, UserId = 3, PaymentType = 3,},
+            new UserPayments {Id = 4, UserId = 4, PaymentType = 1,},
+            new UserPayments {Id = 5, UserId = 5, PaymentType = 1,},
             });
 
             modelBuilder.Entity<Products>().HasData(new Products[]
@@ -64,11 +64,11 @@ namespace Bangazonn
             new ProductCategories {Id = 5, Name = "Outdoors",},
             });
 
-            modelBuilder.Entity<PaymentTypes>().HasData(new PaymentTypes[]
+            modelBuilder.Entity<PaymentType>().HasData(new PaymentType[]
             {
-            new PaymentTypes {Id = 1, Name = "Cash",},
-            new PaymentTypes {Id = 2, Name = "Card",},
-        
+            new PaymentType {Id = 1, Name = "Visa",},
+            new PaymentType {Id = 2, Name = "MasterCard",},
+            new PaymentType {Id = 3, Name = "Gift Card",},
             });
 
             modelBuilder.Entity<OrderStatus>().HasData(new OrderStatus[]
@@ -80,11 +80,11 @@ namespace Bangazonn
 
             _ = modelBuilder.Entity<Orders>().HasData(new Orders[]
          {
-            new Orders {Id = 1, Userid = 1, ProductId = 1, OrderDate = new DateTime(2023,4,20), StatusUpdateDate = new DateTime(2023,4,21)},
-            new Orders {Id = 2, Userid = 2, ProductId = 2, OrderDate = new DateTime(2023,6,2), StatusUpdateDate = new DateTime(2023,6,3)},
-            new Orders {Id = 3, Userid = 3, ProductId = 3, OrderDate = new DateTime(2023,8,15), StatusUpdateDate = new DateTime(2023,8,16)},
-            new Orders {Id = 4, Userid = 4, ProductId = 4, OrderDate = new DateTime(2023,1,28), StatusUpdateDate = new DateTime(2023,1,28)},
-            new Orders {Id = 5, Userid = 5, ProductId = 5, OrderDate = new DateTime(2023,7,4), StatusUpdateDate = new DateTime(2023,7,6)},
+            new Orders {Id = 1, UserId = 1, ProductId = 1, OrderDate = new DateTime(2023,4,20), StatusUpdateDate = new DateTime(2023,4,21)},
+            new Orders {Id = 2, UserId = 2, ProductId = 2, OrderDate = new DateTime(2023,6,2), StatusUpdateDate = new DateTime(2023,6,3)},
+            new Orders {Id = 3, UserId = 3, ProductId = 3, OrderDate = new DateTime(2023,8,15), StatusUpdateDate = new DateTime(2023,8,16)},
+            new Orders {Id = 4, UserId = 4, ProductId = 4, OrderDate = new DateTime(2023,1,28), StatusUpdateDate = new DateTime(2023,1,28)},
+            new Orders {Id = 5, UserId = 5, ProductId = 5, OrderDate = new DateTime(2023,7,4), StatusUpdateDate = new DateTime(2023,7,6)},
          });
 
             ;

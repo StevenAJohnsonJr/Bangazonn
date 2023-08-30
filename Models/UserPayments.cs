@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int PaymentId { get; set; }
+        public int PaymentType { get; set; }
     }
 }
